@@ -1,65 +1,52 @@
-import Image from "next/image";
+import Image from 'next/image';
+import NavBar from './components/NavBar';
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="w-full min-h-screen bg-gray-500">
+      <NavBar />
+      <div className="p-4 w-full">
+        <div className="w-full max-w-202 mx-auto bg-white pt-6 pb-0 md:pt-10 rounded-xl">
+          <div className="w-full px-6 md:px-10">
+            <h1 className="text-preset-2 text-grey-900 text-left">
+              Customize your links
+            </h1>
+            <p className="text-preset-3 text-grey-500 mt-2">
+              Add/edit/remove links below and then share all your profiles with
+              the world!
+            </p>
+            <button className="text-preset-3 w-full h-14 mt-10 rounded-lg flex justify-center items-center text-purple-600 border border-purple-600 cursor-pointer">
+              + Add new link
+            </button>
+          </div>
+
+          <div className="w-full px-6 md:px-10">
+            <div className="flex flex-col items-center justify-between w-full mt-6 h-86.75 md:h-119.75 bg-gray-50 rounded-xl px-6 py-[31.5px] md:py-[67.5px]">
+              <img
+                src="/images/illustration-empty.svg"
+                alt="Get started"
+                className="w-auto h-20 md:h-40"
+              />
+              <h1 className="text-preset-2 text-gray-900">
+                Let's get you started
+              </h1>
+              <p className="text-preset-3 text-gray-500 text-center max-w-122">
+                Use the “Add new link” button to get started. Once you have more
+                than one link, you can reorder and edit them. We're here to help
+                you share your profiles with everyone!
+              </p>
+            </div>
+          </div>
+
+          <div className="h-px w-full bg-grey-200 mt-10"></div>
+
+          <div className="flex justify-center items-center md:justify-end w-full h-22 md:h-26 p-6">
+            <button className="flex justify-center items-center w-full md:w-21.25 h-14 rounded-lg bg-purple-600 text-white text-preset-3">
+              Save
+            </button>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </div>
     </div>
   );
 }
