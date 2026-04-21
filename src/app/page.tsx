@@ -1,12 +1,13 @@
-import Image from 'next/image';
-import NavBar from './components/NavBar';
+import NavBar from '../components/NavBar';
+import PhoneMockup from '../components/PhoneMockup';
 
 export default function Home() {
   return (
-    <div className="w-full min-h-screen bg-gray-500">
+    <div className="w-full min-h-screen bg-gray-50">
       <NavBar />
-      <div className="p-4 w-full">
-        <div className="w-full max-w-202 mx-auto bg-white pt-6 pb-0 md:pt-10 rounded-xl">
+      <div className="flex flex-row justify-center p-4 w-full h-full lg:space-x-6">
+        <PhoneMockup />
+        <div className="w-full max-w-202 mx-auto lg:mx-0 bg-white pt-6 pb-0 md:pt-10 rounded-xl">
           <div className="w-full px-6 md:px-10">
             <h1 className="text-preset-2 text-grey-900 text-left">
               Customize your links
@@ -15,7 +16,7 @@ export default function Home() {
               Add/edit/remove links below and then share all your profiles with
               the world!
             </p>
-            <button className="text-preset-3 w-full h-14 mt-10 rounded-lg flex justify-center items-center text-purple-600 border border-purple-600 cursor-pointer">
+            <button className="text-preset-3 w-full h-14 mt-10 rounded-lg flex justify-center items-center bg-white hover:bg-grey-100 text-purple-600 border border-purple-600 cursor-pointer">
               + Add new link
             </button>
           </div>
@@ -41,7 +42,7 @@ export default function Home() {
           <div className="h-px w-full bg-grey-200 mt-10"></div>
 
           <div className="flex justify-center items-center md:justify-end w-full h-22 md:h-26 p-6">
-            <button className="flex justify-center items-center w-full md:w-21.25 h-14 rounded-lg bg-purple-600 text-white text-preset-3">
+            <button className="flex justify-center items-center w-full md:w-21.25 h-14 rounded-lg bg-purple-600 hover:bg-purple-300 text-white text-preset-3 cursor-pointer">
               Save
             </button>
           </div>
