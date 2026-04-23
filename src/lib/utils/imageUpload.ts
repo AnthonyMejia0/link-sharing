@@ -46,6 +46,7 @@ export const updateUserProfile = async (
       first_name: userInfo?.user_metadata?.first_name,
       last_name: userInfo?.user_metadata?.last_name,
       avatar_url: newAvatarUrl,
+      username: userInfo?.user_metadata?.username,
     },
   });
 
@@ -54,6 +55,7 @@ export const updateUserProfile = async (
     .update({
       first_name: userInfo?.user_metadata?.first_name ?? null,
       last_name: userInfo?.user_metadata?.last_name ?? null,
+      username: userInfo?.user_metadata?.username ?? null,
       email: userInfo?.email,
       avatar_url: newAvatarUrl,
     })

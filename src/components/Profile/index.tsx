@@ -16,10 +16,12 @@ function Profile() {
   const { user, refreshUser } = useUser();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [image, setImage] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const supabase = getSupabaseBrowserClient();
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,6 +65,12 @@ function Profile() {
 
   const handleSave = async () => {
     if (!user) return;
+    setError(false);
+
+    if (!username || !email) {
+      setError(true);
+      return;
+    }
 
     const updatedUser: UserType = {
       id: user.id,
@@ -70,6 +78,7 @@ function Profile() {
       user_metadata: {
         first_name: firstName,
         last_name: lastName,
+        username,
       },
     };
 
@@ -82,8 +91,10 @@ function Profile() {
     } catch (error) {
       console.log(error);
       toast.error('Profile update failed.');
+      setError(true);
     } finally {
       setLoading(false);
+      setError(false);
     }
   };
 
@@ -94,6 +105,7 @@ function Profile() {
       setFirstName(user.user_metadata?.first_name);
     if (user.user_metadata?.last_name)
       setLastName(user.user_metadata.last_name);
+    if (user.user_metadata?.username) setUsername(user.user_metadata.username);
     if (user.email) setEmail(user.email);
     if (user.user_metadata?.avatar_url) setImage(user.user_metadata.avatar_url);
   }, [user]);
@@ -209,10 +221,29 @@ function Profile() {
 
           <div className="md:flex md:flex-row md:justify-between md:items-center w-full mt-2 md:mt-4">
             <label
+              htmlFor="username"
+              className="text-preset-4 md:text-preset-3 text-grey-900"
+            >
+              Username*
+            </label>
+            <input
+              name="username"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="e.g. jappleseed123"
+              className={`w-full md:max-w-84.25 xl:max-w-106 p-4 rounded-lg border border-grey-200 bg-white text-preset-3 text-grey-900 mt-2 outline-none ${
+                error && !username && 'border-red-500'
+              }`}
+            />
+          </div>
+
+          <div className="md:flex md:flex-row md:justify-between md:items-center w-full mt-2 md:mt-4">
+            <label
               htmlFor="last-name"
               className="text-preset-4 md:text-preset-3 text-grey-900"
             >
-              Email
+              Email*
             </label>
             <input
               name="email"
@@ -220,7 +251,9 @@ function Profile() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="e.g. email@example.com"
-              className="w-full md:max-w-84.25 xl:max-w-106 p-4 rounded-lg border border-grey-200 bg-white text-preset-3 text-grey-900 mt-2 outline-none"
+              className={`w-full md:max-w-84.25 xl:max-w-106 p-4 rounded-lg border border-grey-200 bg-white text-preset-3 text-grey-900 mt-2 outline-none ${
+                error && !email && 'border-red-500'
+              }`}
             />
           </div>
         </div>

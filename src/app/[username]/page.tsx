@@ -13,11 +13,15 @@ function SharedLinks() {
   const [user, setUser] = useState<ProfileType | null>(null);
   const [links, setLinks] = useState<LocalLinkType[]>([]);
   const [notFound, setNotFound] = useState(false);
+  const [loadingUser, setLoadingUser] = useState(false);
+  const [loadingLinks, setLoadingLinks] = useState(false);
   const pathname = usePathname();
   const supabase = getSupabaseBrowserClient();
 
   const fetchUserLinks = useCallback(async () => {
     if (!user || !user.id) return;
+    setLoadingLinks(true);
+
     const { data, error } = await supabase
       .from('links')
       .select('*')
@@ -25,6 +29,7 @@ function SharedLinks() {
 
     if (error) {
       console.log(error);
+      setLoadingLinks(false);
       return;
     }
 
@@ -38,10 +43,13 @@ function SharedLinks() {
     });
 
     if (localizedLinks) setLinks([...localizedLinks]);
+
+    setLoadingLinks(false);
   }, [user]);
 
   const fetchUserProfile = useCallback(async () => {
-    console.log('Fetching user profile...');
+    setLoadingUser(true);
+
     const username = pathname.slice(1);
     const { data, error } = await supabase
       .from('profiles')
@@ -50,12 +58,12 @@ function SharedLinks() {
 
     if (error || !data) {
       setNotFound(true);
+      setLoadingUser(false);
       return;
     }
 
-    console.log('DATA: ', data[0]);
-
     setUser(data[0]);
+    setLoadingUser(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -69,7 +77,11 @@ function SharedLinks() {
   return (
     <div className="w-full h-full overflow-y-scroll pb-10 bg-grey-50">
       <div className="w-full h-60 rounded-b-xl bg-transparent md:bg-purple-600 md:pt-6 md:px-6"></div>
-      <div className="flex flex-col shadow justify-center items-center mx-auto mt-12.5 md:-mt-30 w-76.75 h-max bg-transparent md:bg-white rounded-[24px] p-0 md:py-12 md:px-14">
+      <div
+        className={`${
+          (loadingUser || loadingLinks) && 'animate-pulse'
+        } flex flex-col shadow justify-center items-center mx-auto mt-12.5 md:-mt-30 w-76.75 h-max min-h-20 bg-transparent md:bg-white rounded-[24px] p-0 md:py-12 md:px-14`}
+      >
         {user?.avatar_url && (
           <img
             src={user.avatar_url}

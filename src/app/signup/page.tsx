@@ -122,7 +122,7 @@ function SignupPage() {
               className={`mt-2 w-full rounded-lg border ${
                 emailError
                   ? 'border-red-500 text-red-500'
-                  : 'border-grey-200 text-grey-900 focus-visible:border-purple-600 focus-visible:shadow-md focus-visible:shadow-purple-600'
+                  : 'border-grey-200 text-grey-900 focus-visible:border-purple-600 focus-visible:shadow focus-visible:shadow-purple-600'
               } py-4 pl-12 pr-4 placeholder:text-grey-900 outline-none`}
             />
             <EmailIcon className="absolute top-1/2 left-4 -translate-y-[25%] w-4 h-4" />
@@ -153,7 +153,7 @@ function SignupPage() {
               className={`mt-2 w-full rounded-lg border ${
                 passwordError
                   ? 'border-red-500 text-red-500'
-                  : 'border-grey-200 text-grey-900 focus-visible:border-purple-600 focus-visible:shadow-md focus-visible:shadow-purple-600'
+                  : 'border-grey-200 text-grey-900 focus-visible:border-purple-600 focus-visible:shadow focus-visible:shadow-purple-600'
               } py-4 pl-12 pr-4 placeholder:text-grey-900 outline-none`}
             />
             <PasswordIcon className="absolute top-1/2 left-4 -translate-y-[25%] w-4 h-4" />
@@ -181,7 +181,7 @@ function SignupPage() {
               className={`text-preset-3 mt-2 w-full rounded-lg border ${
                 confirmError
                   ? 'border-red-500 text-red-500'
-                  : 'border-grey-200 text-grey-900 focus-visible:border-purple-600 focus-visible:shadow-md focus-visible:shadow-purple-600'
+                  : 'border-grey-200 text-grey-900 focus-visible:border-purple-600 focus-visible:shadow focus-visible:shadow-purple-600'
               } py-4 pl-12 pr-4 placeholder:text-preset-3 placeholder:text-grey-900 outline-none`}
             />
             <PasswordIcon className="absolute top-1/2 left-4 -translate-y-[25%] w-4 h-4" />
