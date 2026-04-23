@@ -5,13 +5,13 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
 import { PLATFORMS } from '@/lib/platforms';
 import { useEffect, useState } from 'react';
 import LinkIcon from '@/assets/images/icon-link.svg';
+import { useSortable } from '@dnd-kit/react/sortable';
 
 type LinkProps = {
   link: LinkType | AddLinkType;
@@ -31,6 +31,10 @@ function Link({
   const [platform, setPlatform] = useState(link.platform ?? '');
   const [linkInput, setLinkInput] = useState(link.url ?? '');
   const [inputError, setInputError] = useState(false);
+  const { ref: sortableRef } = useSortable({
+    id: link.id ?? crypto.randomUUID(),
+    index: index,
+  });
 
   useEffect(() => {
     if (inputError) setInputError(false);
@@ -44,7 +48,7 @@ function Link({
   }, [failedSave, linkInput]);
 
   return (
-    <div className="w-full rounded-xl p-4 md:p-6 bg-grey-50">
+    <li ref={sortableRef} className="w-full rounded-xl p-4 md:p-6 bg-grey-50">
       <div className="flex flex-row justify-between w-full">
         <div className="flex flex-row items-center space-x-2 cursor-pointer">
           <DragIcon className="w-3 h-1.5" />
@@ -104,7 +108,7 @@ function Link({
           )}
         </div>
       </div>
-    </div>
+    </li>
   );
 }
 

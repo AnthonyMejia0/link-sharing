@@ -1,6 +1,6 @@
 'use client';
 
-import { AddLinkType, LinkType, LocalLinkType } from '@/types/links';
+import { AddLinkType, LocalLinkType } from '@/types/links';
 import LinksDisplay from '../LinksDisplay';
 import { useLinks } from '@/context/LinkContext';
 import { useEffect, useState } from 'react';
