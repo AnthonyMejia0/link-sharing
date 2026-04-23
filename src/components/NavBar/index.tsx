@@ -32,7 +32,7 @@ function NavBar() {
         />
       </Link>
 
-      <div className="flex flex-row h-13 pl-5 md:pl-0 md:h-14">
+      <div className="flex flex-row h-13 md:pl-0 md:h-14">
         <Link
           href={'/'}
           className={`px-6 flex justify-center items-center cursor-pointer rounded-lg text-grey-500 hover:text-purple-600 ${

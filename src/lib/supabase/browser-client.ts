@@ -2,12 +2,13 @@
 
 import { createBrowserClient } from '@supabase/ssr';
 import { SupabaseClient } from '@supabase/supabase-js';
+import { Database } from '../../../database.types';
 
 type SupabaseSchema = Record<string, never>;
 
-let client: SupabaseClient<SupabaseSchema> | null = null;
+let client: SupabaseClient<Database> | null = null;
 
-export function getSupabaseBrowserClient(): SupabaseClient<SupabaseSchema> {
+export function getSupabaseBrowserClient(): SupabaseClient<Database> {
   if (client) return client;
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -20,10 +21,7 @@ export function getSupabaseBrowserClient(): SupabaseClient<SupabaseSchema> {
     );
   }
 
-  client = createBrowserClient<SupabaseSchema>(
-    supabaseUrl,
-    supabasePublishableKey,
-  );
+  client = createBrowserClient<Database>(supabaseUrl, supabasePublishableKey);
 
   return client;
 }

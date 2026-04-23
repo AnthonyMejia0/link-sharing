@@ -1,35 +1,32 @@
 'use client';
 
 import { PlatformConfig, PlatformKey, PLATFORMS } from '@/lib/platforms';
-import { LinkType } from '@/types/links';
+import { LocalLinkType } from '@/types/links';
 import ArrowRightIcon from '@/assets/images/icon-arrow-right.svg';
+import { useLinks } from '@/context/LinkContext';
 
 function PhoneMockup() {
-  const links: LinkType[] = [
-    { platform: 'GitHub', url: 'https://github.com/AnthonyMejia0' },
-    {
-      platform: 'Frontend Mentor',
-      url: 'https://frontendmentor.com/AnthonyMejia0',
-    },
-  ];
+  const { links } = useLinks();
 
   return (
-    <div className="relative hidden lg:flex justify-center items-center w-140 min-w-140 bg-white rounded-xl">
-      <img
-        src="/images/illustration-phone-mockup.svg"
-        alt="phone mockup"
-        className="w-76.75 h-157.75 z-0"
-      />
-      <div className="absolute z-10 flex flex-col space-y-5 top-97 left-40.25 w-59.25 h-75 rounded-lg">
-        {links.slice(0, 5).map((link, i) => (
-          <LinkMockup key={i} link={link} />
-        ))}
+    <div className="hidden xl:flex justify-center items-center w-140 min-w-140 max-w-140 bg-white rounded-xl">
+      <div className="relative w-76.75 h-157.75">
+        <img
+          src="/images/illustration-phone-mockup.svg"
+          alt="phone mockup"
+          className="object-cover z-0"
+        />
+        <div className="absolute z-10 flex flex-col space-y-5 top-[277.5px] left-[34.5px] w-59.25 h-75 rounded-lg">
+          {links.slice(0, 5).map((link, i) => (
+            <LinkMockup key={i} link={link} />
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
-function LinkMockup({ link }: { link: LinkType }) {
+function LinkMockup({ link }: { link: LocalLinkType }) {
   const key = link.platform.toLowerCase().replace(/\s/g, '');
   const platformData: PlatformConfig = PLATFORMS[key as PlatformKey];
 

@@ -6,6 +6,7 @@ import PasswordIcon from '@/assets/images/icon-password.svg';
 import { getSupabaseBrowserClient } from '@/lib/supabase/browser-client';
 import { useRouter } from 'next/navigation';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import Link from 'next/link';
 
 function LoginPage() {
   const [emailInput, setEmailInput] = useState('');
@@ -39,9 +40,6 @@ function LoginPage() {
     if (signInError) {
       console.log('Login error: ', signInError.message);
       setError(signInError.message);
-      // toast('User not found.', {
-      //   icon: <UserRoundX height={20} width={20} className="toastIcon" />,
-      // });
     } else {
       router.push('/');
     }
@@ -56,8 +54,15 @@ function LoginPage() {
   if (!mounted) return null;
 
   return (
-    <div className="flex justify-center items-center w-full min-h-screen bg-grey-50">
-      <div className="bg-grey-50 md:bg-white px-7.5 py-10 md:px-10 rounded-xl">
+    <div className="flex flex-col justify-start md:justify-center w-screen min-h-screen bg-grey-50 py-8">
+      <div className="flex justify-start md:justify-center w-full max-w-119 px-7.5 md:px-10 mx-auto">
+        <img
+          src="/images/logo-devlinks-large.svg"
+          alt="devlinks logo"
+          className="w-[182.5px] h-10 -ml-1"
+        />
+      </div>
+      <div className="mx-auto bg-grey-50 w-full md:min-w-119 max-w-119 md:bg-white px-7.5 py-10 md:px-10 mt-12 rounded-xl">
         <h1 className="text-preset-2 md:text-preset-1 text-grey-900 text-left">
           Login
         </h1>
@@ -144,6 +149,14 @@ function LoginPage() {
             {loading ? <LoadingSpinner /> : 'Login'}
           </button>
         </form>
+
+        <p className="text-preset-3 text-grey-500 mt-6 text-center">
+          Don't have an account?{' '}
+          <Link href="/signup" className="text-preset-3 text-purple-600">
+            <br className="md:hidden" />
+            Create account
+          </Link>
+        </p>
       </div>
     </div>
   );

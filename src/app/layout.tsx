@@ -1,6 +1,12 @@
 import type { Metadata } from 'next';
-import { Instrument_Sans } from 'next/font/google';
+import { Instrument_Sans, Inter } from 'next/font/google';
 import './globals.css';
+import { AuthProvider } from '@/context/AuthContext';
+import { cn } from '@/lib/utils';
+import { Toaster } from '@/components/ui/sonner';
+import { LinksProvider } from '@/context/LinkContext';
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 const instrumentSans = Instrument_Sans({
   variable: '--font-inst-sans',
@@ -18,8 +24,29 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${instrumentSans.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html
+      lang="en"
+      className={cn(
+        'h-full',
+        'antialiased',
+        instrumentSans.variable,
+        'font-sans',
+        inter.variable,
+      )}
+    >
+      <body className="min-h-full flex flex-col">
+        <AuthProvider>
+          <LinksProvider>{children}</LinksProvider>
+        </AuthProvider>
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            classNames: {
+              error: 'bg-red-500! text-white!',
+            },
+          }}
+        />
+      </body>
     </html>
   );
 }
