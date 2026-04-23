@@ -34,12 +34,13 @@ export default function RootLayout({
         inter.variable,
       )}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col bg-grey-50">
         <AuthProvider>
           <LinksProvider>{children}</LinksProvider>
         </AuthProvider>
         <Toaster
           position="top-right"
+          closeButton
           toastOptions={{
             classNames: {
               error: 'bg-red-500! text-white!',

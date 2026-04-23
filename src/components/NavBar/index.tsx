@@ -59,7 +59,10 @@ function NavBar() {
         </Link>
       </div>
 
-      <button className="w-13 h-13 rounded-lg bg-white hover:bg-grey-100 border border-purple-600 flex items-center justify-center cursor-pointer md:w-27 md:h-14">
+      <Link
+        href="/preview"
+        className="w-13 h-13 rounded-lg bg-white hover:bg-grey-100 border border-purple-600 flex items-center justify-center cursor-pointer md:w-27 md:h-14"
+      >
         <Image
           src="/images/icon-preview-header.svg"
           width={20}
@@ -70,7 +73,7 @@ function NavBar() {
         <span className="hidden text-preset-3-semi text-purple-600 md:inline-block">
           Preview
         </span>
-      </button>
+      </Link>
     </div>
   );
 }

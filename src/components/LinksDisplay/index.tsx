@@ -12,8 +12,6 @@ type LinksDisplayProps = {
 };
 
 function LinksDisplay({ links, setLinks, failedSave }: LinksDisplayProps) {
-  const [isDropped, setIsDropped] = useState(false);
-
   const { ref: droppableRef } = useDroppable({ id: 'LinkContainer' });
 
   const handleUpdateLink = (index: number, platform: string, url: string) => {
@@ -31,8 +29,6 @@ function LinksDisplay({ links, setLinks, failedSave }: LinksDisplayProps) {
   };
 
   const handleRemoveLink = (index: number) => {
-    console.log('Index: ', index);
-    console.log('Links =>', links);
     setLinks((prev) => prev.filter((_, i) => i !== index));
   };
 

@@ -7,6 +7,7 @@ import { getSupabaseBrowserClient } from '@/lib/supabase/browser-client';
 import { useRouter } from 'next/navigation';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import Link from 'next/link';
+import { generateUsername } from '@/lib/utils/generateUsername';
 
 function SignupPage() {
   const [emailInput, setEmailInput] = useState('');
@@ -39,7 +40,7 @@ function SignupPage() {
       return;
     }
 
-    const { error: signUpError } = await supabase.auth.signUp({
+    const { data, error: signUpError } = await supabase.auth.signUp({
       email: emailInput,
       password: passwordInput,
     });
@@ -48,6 +49,21 @@ function SignupPage() {
       console.log('Login error: ', signUpError.message);
       setError(signUpError.message);
     } else {
+      const user = data.user;
+      const username = generateUsername();
+
+      await supabase.auth.updateUser({
+        data: {
+          username,
+        },
+      });
+
+      await supabase.from('profiles').insert({
+        id: user?.id,
+        email: user?.email,
+        username,
+      });
+
       router.push('/');
     }
 

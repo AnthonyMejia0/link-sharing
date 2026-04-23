@@ -122,7 +122,9 @@ function Profile() {
           </p>
           <div className="md:flex md:flex-row md:items-center">
             <div className="relative flex flex-col justify-center items-center w-37.5 h-37.5 bg-grey-100 rounded-xl mt-4 md:mt-0 md:ml-4">
-              <ImageIcon className={`w-10 h-10 ${image && 'hidden'}`} />
+              <ImageIcon
+                className={`w-10 h-10 text-purple-600 ${image && 'hidden'}`}
+              />
               <p
                 className={`text-preset-3-semi text-purple-600 mt-2 ${
                   image && 'hidden'
@@ -130,14 +132,6 @@ function Profile() {
               >
                 + Upload Image
               </p>
-
-              {/* {user?.user_metadata?.avatar_url && !image && (
-                <img
-                  src={user.user_metadata.avatar_url}
-                  alt="Profile picture"
-                  className="absolute top-0 left-0 bg-transparent w-37.5 h-37.5 z-5 rounded-lg object-cover"
-                />
-              )} */}
 
               {image && (
                 <img
@@ -153,8 +147,24 @@ function Profile() {
                   if (!imageInput) return;
                   imageInput.click();
                 }}
-                className="absolute top-0 left-0 bg-transparent w-37.5 h-37.5 z-10 rounded-lg cursor-pointer"
-              ></button>
+                className={`absolute top-0 left-0 opacity-0 ${
+                  image && 'hover:opacity-100'
+                } flex flex-col justify-center items-center w-37.5 h-37.5 z-10 rounded-lg cursor-pointer`}
+                style={{
+                  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                }}
+              >
+                <ImageIcon
+                  className={`w-10 h-10 text-white ${!image && 'hidden'}`}
+                />
+                <p
+                  className={`text-preset-3-semi text-white mt-2 ${
+                    !image && 'hidden'
+                  }`}
+                >
+                  Change Image
+                </p>
+              </button>
             </div>
             <p className="text-preset-4 text-grey-500 mt-6 md:mt-0 md:ml-6 md:max-w-30 lg:max-w-51.75 text-wrap">
               Image must be below 1024x1024px. Use PNG or JPG format.
