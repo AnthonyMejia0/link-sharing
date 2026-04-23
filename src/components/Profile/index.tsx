@@ -8,6 +8,7 @@ import { UserType } from '@/types/user';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import LoadingSpinner from '../LoadingSpinner';
+import { useRouter } from 'next/navigation';
 
 const MAX_SIZE = 2 * 1024 * 1024;
 const MAX_DIMENSION = 1024;
@@ -23,6 +24,7 @@ function Profile() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const supabase = getSupabaseBrowserClient();
+  const router = useRouter();
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -98,6 +100,12 @@ function Profile() {
     }
   };
 
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    await refreshUser();
+    router.replace('/login');
+  };
+
   useEffect(() => {
     if (!user) return;
 
@@ -121,9 +129,17 @@ function Profile() {
       />
 
       <div className="w-full px-6 md:px-10">
-        <h1 className="text-preset-2 md:text-preset-1 text-grey-900 text-left">
-          Profile Details
-        </h1>
+        <div className="w-full flex flex-row justify-between">
+          <h1 className="text-preset-2 md:text-preset-1 text-grey-900 text-left">
+            Profile Details
+          </h1>
+          <button
+            onClick={handleLogout}
+            className="text-preset-4 text-purple-600 font-semibold border border-purple-600 bg-white px-4 rounded-lg hover:bg-grey-100 cursor-pointer"
+          >
+            Logout
+          </button>
+        </div>
         <p className="text-preset-3 text-grey-500 mt-2">
           Add your details to create a personal touch to your profile.
         </p>

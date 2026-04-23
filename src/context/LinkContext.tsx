@@ -1,21 +1,12 @@
 'use client';
 
-import {
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { getSupabaseBrowserClient } from '@/lib/supabase/browser-client';
-import { UserType } from '@/types/user';
-import { LinkPost, LinkType, LocalLinkType } from '@/types/links';
+import { LocalLinkType } from '@/types/links';
 import { useUser } from './AuthContext';
 
 type LinksContextType = {
   links: LocalLinkType[];
-  //   setLinks: Dispatch<SetStateAction<LinkStyle[] | null>>;
   loading: boolean;
   updateLinks: (newLinks: LocalLinkType[]) => Promise<void>;
   refreshLinks: () => Promise<void>;
@@ -27,11 +18,12 @@ export function LinksProvider({ children }: { children: React.ReactNode }) {
   const supabase = getSupabaseBrowserClient();
   const [links, setLinks] = useState<LocalLinkType[]>([]);
   const [loading, setLoading] = useState(true);
+  const { user } = useUser();
 
   const getLinks = async () => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+    // const {
+    //   data: { user },
+    // } = await supabase.auth.getUser();
 
     if (!user) return;
 
@@ -56,9 +48,9 @@ export function LinksProvider({ children }: { children: React.ReactNode }) {
   };
 
   const updateLinks = async (newLinks: LocalLinkType[]) => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+    // const {
+    //   data: { user },
+    // } = await supabase.auth.getUser();
 
     if (!user) return;
 
@@ -91,7 +83,7 @@ export function LinksProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     getLinks();
-  }, []);
+  }, [user]);
 
   return (
     <LinksContext.Provider

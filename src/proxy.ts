@@ -14,7 +14,7 @@ export async function proxy(request: NextRequest) {
 
   const isAuthRoute = path.startsWith('/login') || path.startsWith('/signup');
 
-  const isProtectedRoute = !isAuthRoute;
+  const isProtectedRoute = path === '/' || path.startsWith('/preview');
 
   if (isProtectedRoute && !user) {
     return NextResponse.redirect(new URL('/login', request.url));
@@ -24,9 +24,13 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
+  if (!user && (path === '/' || path.startsWith('/preview'))) {
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
+
   return response;
 }
 
 export const config = {
-  matcher: ['/', '/login', '/signup', '/reset'],
+  matcher: ['/', '/preview', '/login', '/signup', '/reset'],
 };
