@@ -75,12 +75,12 @@ function SharedLinks() {
   }, [fetchUserProfile]);
 
   return (
-    <div className="w-full h-full overflow-y-scroll pb-10 bg-grey-50">
-      <div className="w-full h-60 rounded-b-xl bg-transparent md:bg-purple-600 md:pt-6 md:px-6"></div>
+    <div className="w-full h-full min-h-screen overflow-y-scroll pb-10 bg-grey-50">
+      <div className="w-full h-60 rounded-b-xl bg-purple-600 md:pt-6 md:px-6"></div>
       <div
         className={`${
           (loadingUser || loadingLinks) && 'animate-pulse'
-        } flex flex-col shadow justify-center items-center mx-auto mt-12.5 md:-mt-30 w-76.75 h-max min-h-20 bg-transparent md:bg-white rounded-[24px] p-0 md:py-12 md:px-14`}
+        } flex flex-col shadow justify-center items-center mx-auto -mt-34 md:-mt-30 w-76.75 h-max min-h-20 bg-white rounded-[24px] p-10 md:py-12 md:px-14`}
       >
         {user?.avatar_url && (
           <img
